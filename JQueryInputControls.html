@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Input Controls</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        div {
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <input class="firstCharUp" type="text" value="Hi this trial text"> .firstCharUp
+    </div>
+    <div>
+        <input class="fullCharUp" type="text" value="Hİ THİS TRİAL TEXT"> .fullCharUp
+    </div>
+    <div>
+        <input class="fullCharDown" type="text" value="hi this trial text"> .fullCharDown
+    </div>
+    <div>
+        <input class="spaceFirstCharUp" type="text" value="Hi This Trial Text"> .spaceFirstCharUp
+    </div>
+    <div>
+        <input class="onlyText" type="text" value="Hi This Trial Text"> .onlyText
+    </div>
+    <div>
+        <input class="onlyNumber" type="text" value="123456789"> .onlyNumber
+    </div>
+    
+    <script>
+        $('input.firstCharUp').keyup(function() {
+            var text = $(this).val();
+            newText = text.substr(0, 1).toLocaleUpperCase() + text.substr(1).toLocaleLowerCase();
+            $(this).val(newText);
+        });
+        $('input.fullCharUp').keyup(function() {
+            var text = $(this).val();
+            newText = text.toLocaleUpperCase();
+            $(this).val(newText);
+        });
+        $('input.fullCharDown').keyup(function() {
+            var text = $(this).val();
+            newText = text.toLocaleLowerCase();
+            $(this).val(newText);
+        });
+        $('input.spaceFirstCharUp').keyup(function () {
+            var text = $(this).val();
+            text = text.split(' ');
+            var newText = [];
+            $.each(text, function (key, data) {
+                newText[key] = data.substr(0, 1).toLocaleUpperCase() + data.substr(1).toLocaleLowerCase();
+            });
+            $(this).val(newText.join(' '));
+        });
+        $(".onlyText").keyup(function(e) {
+            var regex = /^[a-zA-ZığüşöçİĞÜŞÖÇ @]+$/;
+            if (regex.test(this.value) !== true);
+            this.value = this.value.replace(/[^a-zA-ZığüşöçİĞÜŞÖÇ @]+/, '');
+        });
+        $(".onlyNumber").keyup(function(e) {
+            var regex = /^[1-9@]+$/;
+            if (regex.test(this.value) !== true);
+            this.value = this.value.replace(/[^1-9@]+/, '');
+        });
+    </script>
+</body>
+</html>
